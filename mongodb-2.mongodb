@@ -463,7 +463,11 @@ db.user.updateOne({correo: "otro@riwi.net"},
 )
 
 //8. Actualizar el peso del usuario con nombre "Maria" a 140 libras.
-db.user.updateMany({})
+db.user.updateMany({nombre: "Maria"},
+    {$set: {peso: 140}}
+)
+
+//
 
 
 db.user.find()
