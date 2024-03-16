@@ -463,11 +463,18 @@ db.user.updateOne({correo: "otro@riwi.net"},
 )
 
 //8. Actualizar el peso del usuario con nombre "Maria" a 140 libras.
-db.user.updateMany({nombre: "Maria"},
+db.user.updateMany({nombres: "Maria"},
     {$set: {peso: 140}}
 )
 
-//
+//9.Incrementar el salario de todos los usuarios que son de "Estados Unidos" en un 15%
+
+db.user.updateMany({pais: "estados unidos"},
+    {$mul: {salario: 1.15}}
+)
+
+
+
 
 
 db.user.find()
@@ -607,6 +614,15 @@ db.user.updateOne(
         {apellidos: "perez"}
     }
 )
+
+//actualizar un campo especifico de varios registros
+db.user.updateMany(
+    { "_id": { "$in": [ObjectId("65f393c556e2cdb02a67402d"), 
+    ObjectId("65f393c556e2cdb02a674031"), 
+    ObjectId("65f393c556e2cdb02a674032")] } },
+    {$set: {pais: "estados unidos"}}
+    )
+
 
 db.user.find()
 
