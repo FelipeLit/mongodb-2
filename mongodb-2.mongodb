@@ -473,9 +473,74 @@ db.user.updateMany({pais: "estados unidos"},
     {$mul: {salario: 1.15}}
 )
 
+//10. Actualizar el correo electrónico del usuario con nombre "Pedro" a "nuevo_correo@riwi.co".
+db.user.updateMany({nombres:"pedro"},
+    {$set: {correo: "nuevo_correo@riwi.co"}}
+)
+
+//11. Cambiar la edad de todos los usuarios menores de 30 años a 30 años.
+
+db.user.updateMany({edad: {$lt: 30}},
+    {$set: {edad: 30}}
+    )
+
+//12. Incrementar el salario de los usuarios que tienen un salario inferior a 3000 dólares en un 20%
+db.user.updateMany({salario: {$lt: 3000}},
+    {$mul: {salario: 1.20}}
+    )
+
+//13. Actualizar la ciudad de residencia de todos los usuarios que actualmente viven en "Bogotá" a "Medellín".
+
+db.user.updateMany({ciudad: "bogota"},
+    {$set: {ciudad: "medellin"}}
+)
+
+//14. Cambiar el país de residencia de los usuarios con un salario superior a 5000 dólares a "Australia".
+
+db.user.updateMany({salario: {$gt: 5000}},
+    {$set: {pais: "australia"}}
+)
+
+//15. Reducir la edad de todos los usuarios que tienen más de 50 años en 5 años.
+db.user.updateMany(
+    {edad: {$gt: 50}},
+    {$set: {edad: 5}}
+    )
+
+//16. Actualizar el peso de los usuarios que pesan más de 200 libras a 180 libras.
+db.user.updateMany(
+    {peso: {$gt: 200}},
+    {$set: {peso: 180}}
+    )
+
+//17. Incrementar el salario de los usuarios que viven en "London" en un 25%.
+
+db.user.updateMany(
+    {pais: "London"},
+    {$mul: {salario: 1.25}}
+    )
+
+//18. Cambiar el apellido de los usuarios con un salario superior a 4000 dólares a "Smith".
+
+db.user.updateMany(
+    {salario: {$gt: 4000}},
+    {$set: {apellidos: "smith"}}
+    )
 
 
+//19. Actualizar el correo electrónico de todos los usuarios cuyo nombre empiece por "A" a "nuevo@riwi.es".
 
+db.user.updateMany(
+    {nombre: {$regex: /^a/i}},
+    {$set: {correo: "nuevo@riwi.es"}}
+    )
+
+//20. Cambiar la ciudad de residencia de los usuarios con una altura inferior a 160 centímetros a "París".
+
+db.user.updateMany(
+    {altura: {$lt: 160}},
+    {$set: {ciudad: "paris"}}
+    )
 
 db.user.find()
 
@@ -616,12 +681,9 @@ db.user.updateOne(
 )
 
 //actualizar un campo especifico de varios registros
-db.user.updateMany(
-    { "_id": { "$in": [ObjectId("65f393c556e2cdb02a67402d"), 
-    ObjectId("65f393c556e2cdb02a674031"), 
-    ObjectId("65f393c556e2cdb02a674032")] } },
-    {$set: {pais: "estados unidos"}}
-    )
+db.user.updateMany({_id: {$in: [ObjectId('65f4e5d115031cfdd19c54b7'),ObjectId('65f4e5d115031cfdd19c54b6')]}},
+    {$set: {ciudad: "bogota"}}
+)
 
 
 db.user.find()
